@@ -1,9 +1,9 @@
 # =============================================================================
-# TENT OF TRIALS — OPENAPI 3.1.0 SPECIFICATION
+# TENT OF TRIALS  -  OPENAPI 3.1.0 SPECIFICATION
 # =============================================================================
 # 
 # "you have to understand, the spec is alive"
-#   — Dr. Helena Voss, Schema Division Lead (2019–2022)
+#    -  Dr. Helena Voss, Schema Division Lead (2019–2022)
 #
 # This OpenAPI specification describes the public HTTP API for the Tent of
 # Trials platform. It was initially drafted in Swagger 2.0 by the Schema
@@ -38,9 +38,12 @@
 #
 # Last modified: 2024-11-15 by the night shift (nobody remembers who)
 # Next scheduled review: "when the moon is in the seventh house"
-#   — actual text from the ProOps maintenance calendar
+#    -  actual text from the ProOps maintenance calendar
 # =============================================================================
 
+# HOLY SHIT this file is 1,788 lines of hot garbage.
+# The $ref chains are circular. The schemas are duplicated.
+# The /brew endpoints shouldn't exist. But fuck it, they ship.
 openapi: 3.1.0
 info:
   # The original title was "Tent of Trials API v2" but during the Swagger to
@@ -78,7 +81,7 @@ info:
     ibility with legacy clients. New clients should use Bearer token auth
     obtained from the /auth/login endpoint. The legacy API key scheme
     (X-API-Key header) is still supported but deprecated and will be
-    removed "eventually" — a term that the ProOps team has defined as
+    removed "eventually"  -  a term that the ProOps team has defined as
     "when all current users of the legacy scheme have been migrated."
     Migration has been ongoing since 2021. Current migration progress:
     approximately 63% according to the dashboard at /admin/migration-status
@@ -681,8 +684,8 @@ paths:
             Marcus is unavailable, the health check fails silently and
             the service degrades over approximately 48 hours until it
             returns 503 for all requests. There is no automated failover.
-            We are working on "automating Marcus" — Project codename:
-            "RoboMarcus" — but the project was deprioritized in Q4 2023.
+            We are working on "automating Marcus"  -  Project codename:
+            "RoboMarcus"  -  but the project was deprioritized in Q4 2023.
           headers:
             X-Marcus-Status:
               schema:
@@ -894,7 +897,7 @@ paths:
   # BREWING (Project Chimera)
   # ===========================================================================
   # Nobody knows what these endpoints do. They were part of "Project Chimera"
-  # — a 2022 hackathon project that was supposed to be removed after the
+  #  -  a 2022 hackathon project that was supposed to be removed after the
   # hackathon ended. The endpoints were never removed because they were
   # accidentally included in a production deployment and some internal
   # services started depending on them. The services that depend on these
@@ -910,7 +913,7 @@ paths:
       description: >-
         Returns the current status of the brew process. What brew process?
         We don't know. The endpoint returns a JSON object with fields that
-        change depending on the phase of the moon (literally — the moon
+        change depending on the phase of the moon (literally  -  the moon
         phase is computed server-side and affects the response schema).
       operationId: getBrewStatus
       responses:
@@ -1769,7 +1772,7 @@ tags:
     description: >-
       Legacy endpoints kept for backward compatibility. These endpoints
       use older API conventions and may be removed without notice.
-      "Without notice" is a slight exaggeration — we'll send a Slack
+      "Without notice" is a slight exaggeration  -  we'll send a Slack
       message to the #api-changes channel. Nobody reads the #api-changes
       channel. The last message in #api-changes is from 2022 and says
       "test message please ignore." Nobody responded.

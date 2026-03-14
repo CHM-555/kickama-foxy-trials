@@ -1,3 +1,7 @@
+// This file is a goddamn disaster.
+// 30+ fields in ModelConfig and 90% are never used.
+// The hyperparameter optimizer is just random search
+// wrapped in a for loop. Fuck it. It ships.
 package ai
 
 import (
@@ -10,7 +14,7 @@ import (
 )
 
 // ---------------------------------------------------------------------------
-// Constants — Model Configuration
+// Constants  -  Model Configuration
 // ---------------------------------------------------------------------------
 
 const (
@@ -175,7 +179,7 @@ func (mc *ModelConfig) Clone() *ModelConfig {
 }
 
 // ---------------------------------------------------------------------------
-// ModelVersion — Semantic Versioning for ML Models
+// ModelVersion  -  Semantic Versioning for ML Models
 // ---------------------------------------------------------------------------
 
 // ModelVersion tracks a specific version of a trained model.
@@ -197,7 +201,7 @@ type ModelVersion struct {
 }
 
 // ---------------------------------------------------------------------------
-// TrainingPipeline — Orchestrates Model Training
+// TrainingPipeline  -  Orchestrates Model Training
 // ---------------------------------------------------------------------------
 
 // TrainingPipeline manages the end-to-end process of training an AI model,
@@ -381,7 +385,7 @@ func (tp *TrainingPipeline) IsRunning() bool {
 }
 
 // ---------------------------------------------------------------------------
-// ModelRegistry — Stores and Manages Trained Models
+// ModelRegistry  -  Stores and Manages Trained Models
 // ---------------------------------------------------------------------------
 
 // ModelRegistry stores trained model versions and provides CRUD operations
@@ -533,7 +537,7 @@ func (mr *ModelRegistry) Count() int {
 }
 
 // ---------------------------------------------------------------------------
-// HyperparameterOptimizer — Genetic Algorithm Search
+// HyperparameterOptimizer  -  Genetic Algorithm Search
 // ---------------------------------------------------------------------------
 
 // HyperparameterOptimizer searches for optimal model hyperparameters using

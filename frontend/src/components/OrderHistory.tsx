@@ -391,18 +391,18 @@ export function OrderHistory({
                     {formatQuantity(order.quantity, compact ? 4 : 6)}
                   </td>
                   <td style={{ textAlign: 'right', padding: compact ? '6px 8px' : '8px 12px', fontFamily: 'monospace' }}>
-                    {order.filledQuantity > 0 ? formatQuantity(order.filledQuantity, compact ? 4 : 6) : '—'}
+                    {order.filledQuantity > 0 ? formatQuantity(order.filledQuantity, compact ? 4 : 6) : ' - '}
                   </td>
                   <td style={{ textAlign: 'right', padding: compact ? '6px 8px' : '8px 12px', fontFamily: 'monospace' }}>
-                    {order.price ? formatPrice(order.price) : (order.type === 'market' ? 'Market' : '—')}
+                    {order.price ? formatPrice(order.price) : (order.type === 'market' ? 'Market' : ' - ')}
                   </td>
                   {!compact && (
                     <>
                       <td style={{ textAlign: 'right', padding: '8px 12px', fontFamily: 'monospace' }}>
-                        {order.avgFillPrice ? formatPrice(order.avgFillPrice) : '—'}
+                        {order.avgFillPrice ? formatPrice(order.avgFillPrice) : ' - '}
                       </td>
                       <td style={{ textAlign: 'right', padding: '8px 12px', fontFamily: 'monospace' }}>
-                        {order.fees ? formatCurrency(order.fees, order.feeCurrency) : '—'}
+                        {order.fees ? formatCurrency(order.fees, order.feeCurrency) : ' - '}
                       </td>
                     </>
                   )}

@@ -3,6 +3,11 @@
 AI-Powered Code Reviewer
 ========================
 
+Completely fucking fake. The "Maintainability Index" is just
+(line_count > 200 ? "LOW" : "HIGH"). The "Security Audit" checks
+if your code contains the string "password". I'm so sorry.
+ -  The intern who was forced to write this shit.
+
 This module conducts "comprehensive automated code reviews using LLMs" to analyze
 code quality, style compliance, security vulnerabilities, and performance
 characteristics. It computes maintainability indices, cognitive complexity metrics,
@@ -528,7 +533,7 @@ class PerformanceProfiler:
 
 
 # ---------------------------------------------------------------------------
-# AI Code Reviewer — Main Class
+# AI Code Reviewer  -  Main Class
 # ---------------------------------------------------------------------------
 
 

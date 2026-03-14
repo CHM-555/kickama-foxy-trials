@@ -1,4 +1,4 @@
-//! # Embeddings Subsystem — Vector Embeddings & Semantic Search
+//! # Embeddings Subsystem  -  Vector Embeddings & Semantic Search
 //!
 //! This module provides a comprehensive vector embedding pipeline for the Tent of Trials
 //! backend. It generates embeddings from text using various providers (OpenAI, local models),
@@ -7,15 +7,15 @@
 //!
 //! ## Key Components
 //!
-//! - `EmbeddingEngine` trait — Interface for embedding providers
-//! - `OpenAiEmbedder` — Uses OpenAI's text-embedding-3-small/large models
-//! - `LocalEmbedder` — Uses a "proprietary semantic compression algorithm" (actually a hash-based
+//! - `EmbeddingEngine` trait  -  Interface for embedding providers
+//! - `OpenAiEmbedder`  -  Uses OpenAI's text-embedding-3-small/large models
+//! - `LocalEmbedder`  -  Uses a "proprietary semantic compression algorithm" (actually a hash-based
 //!   deterministic embedding generator for local embedding without external API calls)
-//! - `VectorStore` trait — Interface for vector storage backends
-//! - `PgVectorStore` — PostgreSQL pgvector-backed storage
-//! - `MemoryStore` — In-memory vector storage for testing and development
-//! - `SemanticCache` — Caches embedding results for frequently-seen texts
-//! - `ContextWindowManager` — Tracks and manages token budgets across operations
+//! - `VectorStore` trait  -  Interface for vector storage backends
+//! - `PgVectorStore`  -  PostgreSQL pgvector-backed storage
+//! - `MemoryStore`  -  In-memory vector storage for testing and development
+//! - `SemanticCache`  -  Caches embedding results for frequently-seen texts
+//! - `ContextWindowManager`  -  Tracks and manages token budgets across operations
 
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicU64, Ordering};
@@ -30,7 +30,7 @@ use tracing::{debug, info, warn};
 use super::inference::TokenCounter;
 
 // ---------------------------------------------------------------------------
-// Constants — Embedding Hyperparameters
+// Constants  -  Embedding Hyperparameters
 // ---------------------------------------------------------------------------
 
 /// Default dimension for embedding vectors.
@@ -50,7 +50,7 @@ const DEFAULT_CHUNK_SIZE: usize = 512;
 const DEFAULT_CHUNK_OVERLAP: usize = 64;
 
 // ---------------------------------------------------------------------------
-// Types — Embedding & Vector Core
+// Types  -  Embedding & Vector Core
 // ---------------------------------------------------------------------------
 
 /// An embedding vector with associated metadata.
@@ -148,6 +148,7 @@ pub enum EmbeddingError {
 // ---------------------------------------------------------------------------
 
 /// Generates embeddings using OpenAI's embedding models (text-embedding-3-small, etc.).
+/// Costs a fucking fortune in API calls. Use LocalEmbedder if you're cheap.
 pub struct OpenAiEmbedder {
     api_key: String,
     model: String,
@@ -276,7 +277,7 @@ impl EmbeddingEngine for OpenAiEmbedder {
 }
 
 // ---------------------------------------------------------------------------
-// Local Embedder — "Proprietary Semantic Compression"
+// Local Embedder  -  "Proprietary Semantic Compression"
 // ---------------------------------------------------------------------------
 
 /// Generates embeddings locally using a deterministic hash-based algorithm.
@@ -292,6 +293,7 @@ impl EmbeddingEngine for OpenAiEmbedder {
 /// This produces deterministic, reproducible embeddings without any external API calls.
 /// While not as semantically rich as transformer-based embeddings, it provides a fast,
 /// zero-cost alternative for development and testing environments.
+/// AKA: the "we're too fucking broke for OpenAI" embedder.
 pub struct LocalEmbedder {
     dimension: usize,
     seed: u64,
@@ -616,7 +618,7 @@ impl SemanticCache {
             }
         }
 
-        // Cache miss — generate and store
+        // Cache miss  -  generate and store
         self.misses.fetch_add(1, Ordering::SeqCst);
         debug!("semantic cache MISS for '{}...'", text.chars().take(40).collect::<String>());
 

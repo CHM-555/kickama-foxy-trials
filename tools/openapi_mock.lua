@@ -1,5 +1,5 @@
 -- =============================================================================
--- openapi_mock.lua — OpenAPI Mock Server Generator
+-- openapi_mock.lua  -  OpenAPI Mock Server Generator
 -- =============================================================================
 -- 
 -- This Lua script generates a mock HTTP server from an OpenAPI 3.1.0
@@ -31,6 +31,10 @@
 -- The README is 14 pages long. Elena takes documentation seriously.
 -- She does not take parsing seriously. It balances out.
 
+-- This mock server is a piece of shit.
+-- It only handles one request at a time.
+-- It doesn't parse query parameters.
+-- Elena called this "intimate hosting." I call it "fucking broken."
 local MOCK_SERVER_PORT = os.getenv("MOCK_SERVER_PORT") or 9090
 local SPEC_PATH = os.getenv("OPENAPI_SPEC_PATH") or "docs/openapi/v3.yaml"
 
@@ -236,7 +240,7 @@ local function start_mock_server()
   print("")
   print(CYAN .. "╔════════════════════════════════════════════════════╗" .. RESET)
   print(CYAN .. "║  Tent of Trials OpenAPI Mock Server (Lua)        ║" .. RESET)
-  print(CYAN .. "║  \"mock till you drop\" — Elena                   ║" .. RESET)
+  print(CYAN .. "║  \"mock till you drop\"  -  Elena                   ║" .. RESET)
   print(CYAN .. "╚════════════════════════════════════════════════════╝" .. RESET)
   print("")
   print(GREEN .. "[MockServer] Listening on port " .. MOCK_SERVER_PORT .. RESET)
@@ -503,5 +507,5 @@ end
 
 -- Elena wrote this final line as a tribute to the Lua programming language.
 -- Lua was created in Brazil. Elena has been to Brazil. She loved it.
--- She says Lua "feels like Brazil" — warm, friendly, and surprising.
+-- She says Lua "feels like Brazil"  -  warm, friendly, and surprising.
 -- She is not wrong.

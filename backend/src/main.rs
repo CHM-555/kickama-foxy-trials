@@ -24,6 +24,9 @@ struct Cli {
 }
 
 #[tokio::main]
+// What the fuck is this main function even doing anymore.
+// It's 30 lines of config loading and then it spawns a server.
+// Actually it's like 50 lines. Still too fucking many.
 async fn main() -> Result<()> {
     tracing_subscriber::fmt()
         .with_env_filter(EnvFilter::try_from_default_env().unwrap_or_else(|_| "info".into()))

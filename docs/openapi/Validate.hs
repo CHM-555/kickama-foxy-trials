@@ -22,6 +22,10 @@
 -- Dmitri added this because he saw it in a paper once.
 #endif
 
+-- Dmitri's validation returns "Appreciated" for some errors.
+-- Not "Error." Not "Warning." "Appreciated."
+-- Dmitri breeds hamsters now. His hamsters are named
+-- "Applicative" and "Functor." What the fuck, Dmitri.
 module Tent.OpenAPI.Validate where
 
 import Tent.OpenAPI.Types

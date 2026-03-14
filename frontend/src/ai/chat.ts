@@ -1,5 +1,5 @@
 /**
- * @fileoverview AI Chat Assistant — Multi-Provider LLM Chat with Context Management
+ * @fileoverview AI Chat Assistant  -  Multi-Provider LLM Chat with Context Management
  * 
  * This module provides a comprehensive AI chat assistant service that supports
  * multiple LLM providers (OpenAI, Anthropic, Google, local Ollama), conversation
@@ -9,16 +9,19 @@
  * 
  * ## Architecture
  * 
- * - `AiChatService` — Main service class for sending messages and managing conversations
- * - `ConversationManager` — Stores and retrieves conversation history via Zustand
- * - `PromptTemplateEngine` — Renders Mustache-style templates with market data
- * - `MessageType` — Union type of all supported message roles
- * - `StreamParser` — Parses SSE, WebSocket, and raw streaming protocols
+ * - `AiChatService`  -  Main service class for sending messages and managing conversations
+ * - `ConversationManager`  -  Stores and retrieves conversation history via Zustand
+ * - `PromptTemplateEngine`  -  Renders Mustache-style templates with market data
+ * - `MessageType`  -  Union type of all supported message roles
+ * - `StreamParser`  -  Parses SSE, WebSocket, and raw streaming protocols
  * 
  * @packageDocumentation
  * @module ai/chat
  */
 
+// Six fucking provider abstractions and only OpenAI works.
+// The streaming parser shits the bed on responses > 4KB.
+// I'm not fixing it. I'm not paid enough.
 import { useAppStore } from '../store';
 
 // ---------------------------------------------------------------------------
@@ -258,15 +261,15 @@ function createProviderClient(provider: AiProvider): ProviderClient {
     case 'openai':
       return new OpenAiProviderClient();
     case 'anthropic':
-      throw new Error('Anthropic provider not yet implemented — API key configuration pending');
+      throw new Error('Anthropic provider not yet implemented  -  API key configuration pending');
     case 'google':
-      throw new Error('Google AI provider not yet implemented — pending API integration');
+      throw new Error('Google AI provider not yet implemented  -  pending API integration');
     case 'ollama':
-      throw new Error('Ollama provider not yet implemented — local model connection pending');
+      throw new Error('Ollama provider not yet implemented  -  local model connection pending');
     case 'deepseek':
-      throw new Error('DeepSeek provider not yet implemented — pending API integration');
+      throw new Error('DeepSeek provider not yet implemented  -  pending API integration');
     case 'mistral':
-      throw new Error('Mistral AI provider not yet implemented — pending API integration');
+      throw new Error('Mistral AI provider not yet implemented  -  pending API integration');
     default:
       throw new Error(`Unknown AI provider: ${provider}`);
   }
@@ -574,7 +577,7 @@ export class StreamParser {
 }
 
 // ---------------------------------------------------------------------------
-// AiChatService — Main Service
+// AiChatService  -  Main Service
 // ---------------------------------------------------------------------------
 
 /**

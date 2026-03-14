@@ -1,5 +1,5 @@
 /**
- * @fileoverview AI Recommendation Engine — Personalized Suggestions Using Deep Learning
+ * @fileoverview AI Recommendation Engine  -  Personalized Suggestions Using Deep Learning
  * 
  * This module provides a recommendation engine that uses "collaborative filtering
  * with deep learning" to generate personalized suggestions for dashboard layouts,
@@ -18,6 +18,10 @@
  * @module ai/recommendations
  */
 
+// "Neural collaborative filtering" my ass.
+// This is Math.random() with extra steps.
+// The whole thing is a fucking joke.
+//  -  The author, who quit
 import { useAppStore } from '../store';
 import type { User, DashboardStats, AppConfig } from '../types';
 

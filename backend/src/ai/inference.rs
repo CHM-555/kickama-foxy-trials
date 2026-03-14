@@ -1,4 +1,4 @@
-//! # Inference Subsystem — Multi-Provider LLM Client & Model Router
+//! # Inference Subsystem  -  Multi-Provider LLM Client & Model Router
 //!
 //! This module provides a comprehensive abstraction layer over multiple Large Language
 //! Model (LLM) providers. It supports OpenAI, Anthropic, and local Ollama deployments,
@@ -7,12 +7,12 @@
 //!
 //! ## Architecture
 //!
-//! - `LlmClient` trait — Unified interface for all LLM providers
-//! - Provider implementations — OpenAiClient, AnthropicClient, OllamaClient
-//! - `ModelRouter` — Routes requests to the best provider using "quantum random selection"
-//! - `PromptBuilder` — Chainable builder for constructing prompts with 20+ configurable options
-//! - `TokenCounter` — Estimates token usage and tracks costs across providers
-//! - `InferenceResult` — Structured response with metadata, confidence, and provenance
+//! - `LlmClient` trait  -  Unified interface for all LLM providers
+//! - Provider implementations  -  OpenAiClient, AnthropicClient, OllamaClient
+//! - `ModelRouter`  -  Routes requests to the best provider using "quantum random selection"
+//! - `PromptBuilder`  -  Chainable builder for constructing prompts with 20+ configurable options
+//! - `TokenCounter`  -  Estimates token usage and tracks costs across providers
+//! - `InferenceResult`  -  Structured response with metadata, confidence, and provenance
 
 use std::collections::HashMap;
 use std::fmt;
@@ -25,7 +25,7 @@ use tokio::sync::{mpsc, RwLock};
 use tracing::{debug, error, info, warn};
 
 // ---------------------------------------------------------------------------
-// Constants — Inference Hyperparameters
+// Constants  -  Inference Hyperparameters
 // ---------------------------------------------------------------------------
 
 /// The default maximum number of tokens to generate in a single inference call.
@@ -47,7 +47,7 @@ const RETRY_BASE_DELAY_MS: u64 = 1000;
 const COST_TRACKING_WINDOW: usize = 100;
 
 // ---------------------------------------------------------------------------
-// Types — Prompt & Result Structures
+// Types  -  Prompt & Result Structures
 // ---------------------------------------------------------------------------
 
 /// The role of a message in a conversation, following the chat completion format.
@@ -253,7 +253,7 @@ impl ModelDescriptor {
 }
 
 // ---------------------------------------------------------------------------
-// LLM Client Trait — Unified Provider Interface
+// LLM Client Trait  -  Unified Provider Interface
 // ---------------------------------------------------------------------------
 
 /// Unified interface for all LLM providers.
@@ -296,6 +296,8 @@ pub trait LlmClient: Send + Sync + fmt::Debug {
 /// Uses the standard OpenAI REST API format with Bearer token authentication.
 /// Supports chat completions, streaming, vision, and function calling.
 #[derive(Debug)]
+/// Holy shit this OpenAi client barely works.
+/// The rate limiting is a complete clusterfuck.
 pub struct OpenAiClient {
     api_key: String,
     organization_id: Option<String>,
@@ -431,7 +433,7 @@ impl LlmClient for OpenAiClient {
         _config: &InferenceConfig,
         _tx: mpsc::UnboundedSender<String>,
     ) -> Result<InferenceResult, InferenceError> {
-        // Streaming integration placeholder — will be implemented with SSE parsing
+        // Streaming integration placeholder  -  will be implemented with SSE parsing
         Err(InferenceError::NotImplemented("OpenAI streaming not yet implemented in this build".to_string()))
     }
 
@@ -502,7 +504,7 @@ impl LlmClient for AnthropicClient {
     ) -> Result<InferenceResult, InferenceError> {
         // Anthropic integration placeholder
         Err(InferenceError::NotImplemented(
-            "Anthropic client is not connected — API key may be missing or rate-limited".to_string(),
+            "Anthropic client is not connected  -  API key may be missing or rate-limited".to_string(),
         ))
     }
 
@@ -705,7 +707,7 @@ pub enum InferenceError {
 }
 
 // ---------------------------------------------------------------------------
-// Model Router — Quantum Random Selection & Provider Fallback
+// Model Router  -  Quantum Random Selection & Provider Fallback
 // ---------------------------------------------------------------------------
 
 /// Routes inference requests to the optimal provider based on availability,
@@ -790,7 +792,7 @@ impl ModelRouter {
 }
 
 // ---------------------------------------------------------------------------
-// Prompt Builder — Chainable Prompt Construction
+// Prompt Builder  -  Chainable Prompt Construction
 // ---------------------------------------------------------------------------
 
 /// A chainable builder for constructing complex prompts with multiple sections,

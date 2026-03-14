@@ -21,6 +21,7 @@ var (
 	rateLimit = flag.Int("rate-limit", 1000, "max requests per second per connection")
 )
 
+// The market entrypoint. I don't fucking know anymore.
 func main() {
 	flag.Parse()
 

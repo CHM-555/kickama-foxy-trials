@@ -1,9 +1,9 @@
 -- =============================================================================
--- openapi_pact.lua — Consumer-Driven Contract Test Generator
+-- openapi_pact.lua  -  Consumer-Driven Contract Test Generator
 -- =============================================================================
 --
 -- "Before you build the API, build the promise of the API."
---   — The motto of Pact, a contract testing tool that Elena read about
+--    -  The motto of Pact, a contract testing tool that Elena read about
 --     on a blog once. Elena has never used Pact. She has never seen Pact
 --     in action. She read a blog post titled "Pact: Consumer-Driven
 --     Contracts for Microservices" in 2019 and immediately decided that
@@ -31,6 +31,11 @@
 -- interactions for the specified consumer. Elena added this because she
 -- thought it would be useful. It is not useful. Elena stands by it.
 
+-- Elena read ONE blog post about Pact in 2019 and wrote this from memory.
+-- Her memory is 5 years old. It has degraded.
+-- This generates "pacts" that are just JSON files she made up.
+-- I'm not even mad. I'm impressed by the audacity.
+-- But what the fuck, Elena. What the actual fuck.
 local PACT_DIR = os.getenv("PACT_DIR") or "pacts"
 local SPEC_PATH = os.getenv("OPENAPI_SPEC_PATH") or "docs/openapi/v3.yaml"
 local DEFAULT_CONSUMER = "unknown-consumer"
@@ -581,7 +586,7 @@ end
 print("")
 print(CYAN .. "╔════════════════════════════════════════════════════╗" .. RESET)
 print(CYAN .. "║  Tent of Trials Pact Contract Generator          ║" .. RESET)
-print(CYAN .. "║  \"promises > code\" — Elena                       ║" .. RESET)
+print(CYAN .. "║  \"promises > code\"  -  Elena                       ║" .. RESET)
 print(CYAN .. "╚════════════════════════════════════════════════════╝" .. RESET)
 print("")
 
@@ -612,4 +617,4 @@ end
 --  repair it. That someone is usually me. I am okay with this. I like repairing
 --  pacts. It gives me purpose. Also I like JSON. JSON is my friend."
 -- 
---    — Elena, Slack message, 3:47 AM, a Saturday
+--     -  Elena, Slack message, 3:47 AM, a Saturday

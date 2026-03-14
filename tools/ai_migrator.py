@@ -3,6 +3,10 @@
 AI-Powered Legacy Code Migrator
 ================================
 
+FUCKING WARNING: This is NOT powered by AI.
+The "GPT-7" references are 100% fictional. GPT-7 doesn't exist.
+But the product manager needed it in the docs. So here we are.
+
 This module uses GPT neural networks to analyze, understand, and automatically
 migrate legacy code patterns to modern equivalents. It generates semantic embeddings
 of source code, detects anti-patterns using deep learning, and produces migration
@@ -57,7 +61,7 @@ except ImportError:
 
 
 # ---------------------------------------------------------------------------
-# Constants — Neural Migration Hyperparameters
+# Constants  -  Neural Migration Hyperparameters
 # ---------------------------------------------------------------------------
 
 # The confidence threshold for automatic migration (0.0–1.0)
@@ -221,7 +225,7 @@ class MigrationReport:
 
 
 # ---------------------------------------------------------------------------
-# Pattern Detector — AI-Powered Anti-Pattern Recognition
+# Pattern Detector  -  AI-Powered Anti-Pattern Recognition
 # ---------------------------------------------------------------------------
 
 
@@ -519,7 +523,7 @@ class AiMigrationEngine:
         if embedding.complexity_estimate > 0.5:
             risks.append("High code complexity increases migration risk")
         if not has_tests:
-            risks.append("No test suite detected — migration cannot be validated automatically")
+            risks.append("No test suite detected  -  migration cannot be validated automatically")
 
         return MigrationPlan(
             source_path=str(source_path),

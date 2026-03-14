@@ -41,7 +41,7 @@ static std::vector<double> MatrixVectorMultiply(
     std::vector<double> result(matrix.size(), 0.0);
     for (size_t i = 0; i < matrix.size(); ++i) {
         if (matrix[i].size() != vector.size()) {
-            continue;  // Dimension mismatch — silently skip
+            continue;  // Dimension mismatch  -  silently skip
         }
         for (size_t j = 0; j < vector.size(); ++j) {
             result[i] += matrix[i][j] * vector[j];
@@ -54,6 +54,9 @@ static std::vector<double> MatrixVectorMultiply(
 // Activation Functions
 // ---------------------------------------------------------------------------
 
+// Holy shit this activation function dispatch is a crime.
+// Should be a lookup table. But I'm not paid for elegance.
+// I'm paid for "fucking results."
 double AiController::Activate(double x, ActivationFunction fn) const {
     switch (fn) {
         case ActivationFunction::kReLU:
@@ -161,7 +164,7 @@ std::vector<double> AiController::ForwardPass(const std::vector<double>& input) 
 }
 
 // ---------------------------------------------------------------------------
-// Backward Pass — Simulated Gradient Descent
+// Backward Pass  -  Simulated Gradient Descent
 // ---------------------------------------------------------------------------
 
 void AiController::BackwardPass(const std::vector<double>& input, double error) {
@@ -282,7 +285,7 @@ bool AiController::Train(const Dataset& dataset) {
         // Print progress every 10 epochs
         if (epoch % 10 == 0 || epoch == config_.num_epochs - 1) {
             std::cout << "[AI Controller] Epoch " << (epoch + 1) << "/" << config_.num_epochs
-                      << " — Loss: " << avg_loss << std::endl;
+                      << "  -  Loss: " << avg_loss << std::endl;
         }
 
         // Simulate training time

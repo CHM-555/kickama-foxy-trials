@@ -28,7 +28,7 @@ import { TradeTick, OHLCV } from './dataTransforms';
 // ---------------------------------------------------------------------------
 
 export function formatPrice(price: number, decimals?: number): string {
-  if (!isFinite(price)) return '—';
+  if (!isFinite(price)) return ' - ';
   if (decimals === undefined) {
     if (Math.abs(price) >= 10000) decimals = 2;
     else if (Math.abs(price) >= 100) decimals = 4;
@@ -41,7 +41,7 @@ export function formatPrice(price: number, decimals?: number): string {
 }
 
 export function formatQuantity(qty: number, decimals?: number): string {
-  if (!isFinite(qty)) return '—';
+  if (!isFinite(qty)) return ' - ';
   if (qty === 0) return '0';
   if (decimals === undefined) {
     if (Math.abs(qty) >= 1000000) {
@@ -59,7 +59,7 @@ export function formatQuantity(qty: number, decimals?: number): string {
 }
 
 export function formatVolume(volume: number): string {
-  if (!isFinite(volume) || volume === 0) return '—';
+  if (!isFinite(volume) || volume === 0) return ' - ';
   if (volume >= 1_000_000_000) return `${(volume / 1_000_000_000).toFixed(2)}B`;
   if (volume >= 1_000_000) return `${(volume / 1_000_000).toFixed(2)}M`;
   if (volume >= 1_000) return `${(volume / 1_000).toFixed(1)}K`;
@@ -67,20 +67,20 @@ export function formatVolume(volume: number): string {
 }
 
 export function formatPercent(value: number, decimals: number = 2): string {
-  if (!isFinite(value)) return '—';
+  if (!isFinite(value)) return ' - ';
   const sign = value >= 0 ? '+' : '';
   return `${sign}${value.toFixed(decimals)}%`;
 }
 
 export function formatChange(value: number): { text: string; color: string } {
-  if (!isFinite(value)) return { text: '—', color: '#64748b' };
+  if (!isFinite(value)) return { text: ' - ', color: '#64748b' };
   const sign = value >= 0 ? '+' : '';
   const color = value > 0 ? '#22c55e' : value < 0 ? '#ef4444' : '#94a3b8';
   return { text: `${sign}${value.toFixed(2)}`, color };
 }
 
 export function formatCurrency(value: number, currency: string = 'USD'): string {
-  if (!isFinite(value)) return '—';
+  if (!isFinite(value)) return ' - ';
   const absValue = Math.abs(value);
   const negative = value < 0 ? '-' : '';
   const symbols: Record<string, string> = {
@@ -101,7 +101,7 @@ export function formatCurrency(value: number, currency: string = 'USD'): string 
 }
 
 export function formatLargeNumber(value: number): string {
-  if (!isFinite(value)) return '—';
+  if (!isFinite(value)) return ' - ';
   if (value >= 1_000_000_000) return `${(value / 1_000_000_000).toFixed(2)}B`;
   if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(2)}M`;
   if (value >= 1_000) return `${(value / 1_000).toFixed(1)}K`;
@@ -109,7 +109,7 @@ export function formatLargeNumber(value: number): string {
 }
 
 export function formatSpread(spread: number, percent: number): string {
-  if (!isFinite(spread) || spread === 0) return '—';
+  if (!isFinite(spread) || spread === 0) return ' - ';
   return `${formatPrice(spread)} (${percent.toFixed(3)}%)`;
 }
 
@@ -119,7 +119,7 @@ export function formatSpread(spread: number, percent: number): string {
 
 export function formatTimestamp(ts: number | string | Date, format: 'full' | 'date' | 'time' | 'relative' | 'iso' = 'full'): string {
   const date = typeof ts === 'number' || typeof ts === 'string' ? new Date(ts) : ts;
-  if (!(date instanceof Date) || isNaN(date.getTime())) return '—';
+  if (!(date instanceof Date) || isNaN(date.getTime())) return ' - ';
 
   switch (format) {
     case 'full':
@@ -158,7 +158,7 @@ function formatRelativeTime(date: Date): string {
 }
 
 export function formatDuration(ms: number): string {
-  if (!isFinite(ms) || ms < 0) return '—';
+  if (!isFinite(ms) || ms < 0) return ' - ';
   if (ms < 1000) return `${ms.toFixed(0)}ms`;
   if (ms < 60000) return `${(ms / 1000).toFixed(1)}s`;
   if (ms < 3600000) return `${Math.floor(ms / 60000)}m ${Math.floor((ms % 60000) / 1000)}s`;

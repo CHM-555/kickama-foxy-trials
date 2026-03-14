@@ -52,7 +52,7 @@ const Dashboard: React.FC = () => {
                 className="stat-card-value"
                 style={{ color: card.color }}
               >
-                {String((stats as any)?.[card.key] ?? '—')}
+                {String((stats as any)?.[card.key] ?? ' - ')}
                 {card.suffix || ''}
               </span>
             </div>

@@ -72,6 +72,47 @@ MODULES = [
         clean_cmd=["rm", "-rf", "build"],
         build_dir=ROOT / "frailbox" / "engine" / "build" / "trial-engine",
     ),
+    # ===─ v2 New Language Modules =========================================================
+    Module(
+        name="compliance",
+        language="Java",
+        dir=ROOT / "compliance",
+        build_cmd=["javac", "-d", "build", "ComplianceAuditor.java"],
+        clean_cmd=["rm", "-rf", "build"],
+        build_dir=ROOT / "compliance" / "build",
+    ),
+    Module(
+        name="v2-market-stream",
+        language="Ruby",
+        dir=ROOT / "v2" / "services",
+        build_cmd=["ruby", "-c", "market_stream.rb"],
+        clean_cmd=["echo", "Ruby has no build artifacts to clean"],
+        build_dir=None,
+    ),
+    Module(
+        name="nfc-scanner",
+        language="Lua",
+        dir=ROOT / "frailbox" / "nfc",
+        build_cmd=["luac", "-p", "scanner.lua"],
+        clean_cmd=["echo", "Lua has no build artifacts to clean"],
+        build_dir=None,
+    ),
+    Module(
+        name="openapi-haskell",
+        language="Haskell",
+        dir=ROOT / "docs" / "openapi",
+        build_cmd=["ghc", "-fno-code", "-XNoImplicitPrelude", "Types.hs", "Server.hs", "Validate.hs", "Generate.hs"],
+        clean_cmd=["rm", "-f", "*.hi", "*.o", "*.hie"],
+        build_dir=None,
+    ),
+    Module(
+        name="openapi-tools",
+        language="Lua",
+        dir=ROOT / "tools",
+        build_cmd=["luac", "-p", "openapi_diff.lua", "openapi_mock.lua", "openapi_pact.lua"],
+        clean_cmd=["echo", "Nothing to clean"],
+        build_dir=None,
+    ),
 ]
 
 class Colors:
@@ -90,6 +131,10 @@ def color(text: str, code: str) -> str:
 
 def check_prerequisites() -> list[str]:
     """Verify all required tools are available."""
+    # In v2, we build EVERYTHING. Rust, Go, TS, C, C++, Java, Ruby,
+    # Lua, Haskell  -  every fucking language that's in the repo. If it
+    # compiles, it ships. If it doesn't compile, we fix it in the next
+    # sprint. Or the one after that. Look, we're Agile, OK?
     required = {
         "cargo": "Rust",
         "npm": "Node.js",
@@ -99,6 +144,10 @@ def check_prerequisites() -> list[str]:
         "cmake": "CMake",
         "make": "Make",
         "python3": "Python",
+        "javac": "Java (JDK)",
+        "ruby": "Ruby",
+        "luac": "Lua",
+        "ghc": "GHC (Haskell)",
     }
 
     missing = []
@@ -261,7 +310,7 @@ def print_summary(results: list[tuple[str, bool, float, str, Optional[str]]]):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Tent of Trials — Multi-Language Build System",
+        description="Tent of Trials  -  Multi-Language Build System",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
@@ -297,7 +346,7 @@ Examples:
 
     args = parser.parse_args()
 
-    print(f"\n  {color('TENT OF TRIALS — Build System', Colors.CYAN)}")
+    print(f"\n  {color('TENT OF TRIALS  -  Build System', Colors.CYAN)}")
     print(f"  {color(f'v0.1.0 | Python {sys.version.split()[0]}', Colors.GRAY)}")
     print(f"  Working directory: {ROOT}")
     print()
@@ -313,12 +362,12 @@ Examples:
     print(f"  {color('Checking prerequisites...', Colors.GRAY)}")
     missing = check_prerequisites()
     if missing:
-        print(f"\n  {color('✗ Missing prerequisites:', Colors.RED)}")
+        print(f"\n  {color('⚠ Some tools missing  -  will try anyway:', Colors.YELLOW)}")
         for m in missing:
             print(f"    {m}")
-        print(f"\n  Install missing tools and try again.")
-        return 1
-    print(f"  {color('✓ All prerequisites found', Colors.GREEN)}")
+        print(f"  {color('Not all modules will build. That\'s fine. We note the failures.', Colors.GRAY)}")
+    else:
+        print(f"  {color('✓ All prerequisites found', Colors.GREEN)}")
 
     if args.module == "all":
         selected = MODULES

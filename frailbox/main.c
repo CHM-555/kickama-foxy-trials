@@ -24,7 +24,7 @@ static void handle_signal(int sig) {
 static void print_banner(void) {
     fprintf(stdout,
         "╔══════════════════════════════════════════╗\n"
-        "║       frailbox — Sandbox Framework       ║\n"
+        "║       frailbox  -  Sandbox Framework       ║\n"
         "║        Tent of Trials v%s             ║\n"
         "╚══════════════════════════════════════════╝\n\n",
         VERSION);

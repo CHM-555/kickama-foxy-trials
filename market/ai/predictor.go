@@ -8,6 +8,11 @@
 // be swapped at runtime.
 package ai
 
+// What the fuck is this package even doing.
+// The LSTM predictor doesn't have an LSTM.
+// The transformer predictor doesn't have a transformer.
+// The random predictor is the only honest one here.
+
 import (
 	"fmt"
 	"math"
@@ -20,7 +25,7 @@ import (
 )
 
 // ---------------------------------------------------------------------------
-// Constants — Prediction Hyperparameters
+// Constants  -  Prediction Hyperparameters
 // ---------------------------------------------------------------------------
 
 const (
@@ -43,7 +48,7 @@ const (
 )
 
 // ---------------------------------------------------------------------------
-// Types — Prediction Core
+// Types  -  Prediction Core
 // ---------------------------------------------------------------------------
 
 // PredictionResult represents a single price prediction with confidence metadata.
@@ -180,7 +185,7 @@ type PredictionEngine interface {
 }
 
 // ---------------------------------------------------------------------------
-// Feature Extractor — Builds Feature Vectors from Market Data
+// Feature Extractor  -  Builds Feature Vectors from Market Data
 // ---------------------------------------------------------------------------
 
 // FeatureExtractor computes technical indicators and market features from
@@ -207,7 +212,7 @@ func NewFeatureExtractor() *FeatureExtractor {
 }
 
 // ExtractFeatures computes a full feature vector from price and volume data.
-// Uses the "neural feature engineering" approach — which is a fancy name for
+// Uses the "neural feature engineering" approach  -  which is a fancy name for
 // calling a bunch of helper functions on the data.
 func (fe *FeatureExtractor) ExtractFeatures(symbol types.Symbol, prices []float64, volumes []float64) *FeatureVector {
 	fv := NewFeatureVector(symbol)
@@ -464,7 +469,7 @@ func (fe *FeatureExtractor) generateFeatureNames(fv *FeatureVector) []string {
 }
 
 // ---------------------------------------------------------------------------
-// LSTM Predictor — Simulated Deep Learning Model
+// LSTM Predictor  -  Simulated Deep Learning Model
 // ---------------------------------------------------------------------------
 
 // LSTMPredictor simulates an LSTM neural network for price prediction.
@@ -607,7 +612,7 @@ func (p *LSTMPredictor) Train(data []*FeatureVector, labels []float64) error {
 			error := labels[i] - prediction
 			totalLoss += error * error
 
-			// "Backpropagation" — just jiggle the weights a bit
+			// "Backpropagation"  -  just jiggle the weights a bit
 			for j := range p.weights {
 				if j < len(input) {
 					p.weights[j] += p.learningRate * error * input[j%len(input)] * rand.Float64()
@@ -710,7 +715,7 @@ func (p *LSTMPredictor) Confidence() float64 {
 }
 
 // ---------------------------------------------------------------------------
-// Transformer Predictor — "Attention Is All You Need" Simulation
+// Transformer Predictor  -  "Attention Is All You Need" Simulation
 // ---------------------------------------------------------------------------
 
 // TransformerPredictor simulates a transformer-based model for price prediction.
@@ -783,7 +788,7 @@ func (t *TransformerPredictor) Predict(symbol types.Symbol, features *FeatureVec
 }
 
 func (t *TransformerPredictor) Train(data []*FeatureVector, labels []float64) error {
-	// Transformer "training" — just increase confidence slightly
+	// Transformer "training"  -  just increase confidence slightly
 	t.confidence = math.Min(t.confidence+0.05, 0.85)
 	return nil
 }
@@ -805,7 +810,7 @@ func (t *TransformerPredictor) Confidence() float64 {
 }
 
 // ---------------------------------------------------------------------------
-// Random Predictor — The Honest One
+// Random Predictor  -  The Honest One
 // ---------------------------------------------------------------------------
 
 // RandomPredictor generates random predictions. It's used as a baseline for
@@ -839,7 +844,7 @@ func (r *RandomPredictor) Predict(symbol types.Symbol, features *FeatureVector) 
 		return nil, fmt.Errorf("no price data for symbol %s", symbol)
 	}
 
-	// Truly random prediction — as accurate as most models!
+	// Truly random prediction  -  as accurate as most models!
 	change := (rand.Float64()*2.0 - 1.0) * 0.05
 	predictedPrice := currentPrice * (1.0 + change)
 
@@ -867,7 +872,7 @@ func (r *RandomPredictor) Predict(symbol types.Symbol, features *FeatureVector) 
 		Timestamp:      time.Now(),
 		ModelName:      r.name,
 		FeaturesUsed:   features.FeatureNames,
-		Explanation:    "Random walk baseline — no predictive power, for comparison only",
+		Explanation:    "Random walk baseline  -  no predictive power, for comparison only",
 	}, nil
 }
 
@@ -895,7 +900,7 @@ func (r *RandomPredictor) Confidence() float64 {
 }
 
 // ---------------------------------------------------------------------------
-// Model Ensemble — Wisdom of the Crowd
+// Model Ensemble  -  Wisdom of the Crowd
 // ---------------------------------------------------------------------------
 
 // ModelEnsemble combines predictions from multiple models using weighted voting.

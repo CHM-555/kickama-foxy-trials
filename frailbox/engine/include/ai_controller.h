@@ -1,6 +1,6 @@
 /**
  * @file ai_controller.h
- * @brief AI Controller — Neural Network Inference Engine for the Frailbox Trial Engine
+ * @brief AI Controller  -  Neural Network Inference Engine for the Frailbox Trial Engine
  *
  * This header defines the AI controller interface for the Frailbox trial engine.
  * It provides a C++ abstraction layer for neural network inference, model training,
@@ -12,12 +12,12 @@
  *
  * ## Architecture
  *
- * - AiController — Main controller class with Initialize, Train, Infer, Optimize
- * - NeuralNetwork — Neural network structure with layers, weights, activations
- * - TrainingConfig — Comprehensive hyperparameter configuration (20+ fields)
- * - Dataset — Training data management with batching and augmentation
- * - InferenceEngine — Abstract base class for inference backends
- * - PredictionResult<T> — Template struct for typed prediction outputs
+ * - AiController  -  Main controller class with Initialize, Train, Infer, Optimize
+ * - NeuralNetwork  -  Neural network structure with layers, weights, activations
+ * - TrainingConfig  -  Comprehensive hyperparameter configuration (20+ fields)
+ * - Dataset  -  Training data management with batching and augmentation
+ * - InferenceEngine  -  Abstract base class for inference backends
+ * - PredictionResult<T>  -  Template struct for typed prediction outputs
  *
  * @author Tent of Trials AI Team
  * @version 2.1.0
@@ -53,7 +53,7 @@ class InferenceEngine;
 struct TrainingConfig;
 
 // ---------------------------------------------------------------------------
-// Constants — Default Hyperparameters
+// Constants  -  Default Hyperparameters
 // ---------------------------------------------------------------------------
 
 /// Default learning rate for neural network training.
@@ -131,7 +131,7 @@ enum class ControllerState {
 };
 
 // ---------------------------------------------------------------------------
-// TrainingConfig — 20+ Hyperparameter Fields
+// TrainingConfig  -  20+ Hyperparameter Fields
 // ---------------------------------------------------------------------------
 
 /**
@@ -204,7 +204,7 @@ struct TrainingConfig {
 };
 
 // ---------------------------------------------------------------------------
-// NeuralNetwork — Layer-Based Network Structure
+// NeuralNetwork  -  Layer-Based Network Structure
 // ---------------------------------------------------------------------------
 
 /**
@@ -273,7 +273,7 @@ struct NeuralNetwork {
 };
 
 // ---------------------------------------------------------------------------
-// Dataset — Training Data Management
+// Dataset  -  Training Data Management
 // ---------------------------------------------------------------------------
 
 /**
@@ -364,7 +364,7 @@ private:
 };
 
 // ---------------------------------------------------------------------------
-// PredictionResult — Templated Prediction Output
+// PredictionResult  -  Templated Prediction Output
 // ---------------------------------------------------------------------------
 
 /**
@@ -395,7 +395,7 @@ struct PredictionResult {
 };
 
 // ---------------------------------------------------------------------------
-// InferenceEngine — Abstract Base Class
+// InferenceEngine  -  Abstract Base Class
 // ---------------------------------------------------------------------------
 
 /**
@@ -426,7 +426,7 @@ public:
 };
 
 // ---------------------------------------------------------------------------
-// AiController — Main Controller Class
+// AiController  -  Main Controller Class
 // ---------------------------------------------------------------------------
 
 /**
@@ -441,6 +441,8 @@ public:
  *   auto result = controller.Infer(input_vector);
  * @endcode
  */
+// The AiController. It controls shit.
+// Not well. But it controls it.
 class AiController {
 public:
     AiController();

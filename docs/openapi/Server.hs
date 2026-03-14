@@ -37,6 +37,9 @@
 -- variables are referenced in different parts of this file.
 -- We don't know which one takes precedence. Try both.
 
+-- This server is held together by hopes and goddamn dreams.
+-- Priya's ZIP file is password-protected and the password is lost.
+-- The server works anyway. Fuck if I know how.
 module Main where
 
 import Tent.OpenAPI.Types (OpenApi, loadOpenApi, Server(..), Paths(..))
@@ -340,7 +343,7 @@ main = do
       putStrLn $ "[Server] Spec loaded successfully."
       case T.oaInfo spec of
         Just info -> putStrLn $ "[Server] API: " ++ show (T.iTitle info)
-        Nothing -> putStrLn $ "[Server] API: (no title — the spec is anonymous)"
+        Nothing -> putStrLn $ "[Server] API: (no title  -  the spec is anonymous)"
       putStrLn "[Server] Running pre-flight validation..."
       void $ validateOpenApi spec
       putStrLn "[Server] Pre-flight complete. Starting server..."
@@ -363,13 +366,13 @@ runServer spec = do
 
   putStrLn $ "[Server] Starting on port " ++ show port
   putStrLn "[Server] Endpoints:"
-  putStrLn "  GET /openapi.json    — OpenAPI spec (JSON)"
-  putStrLn "  GET /openapi.yaml    — OpenAPI spec (YAML)"
-  putStrLn "  GET /openapi/validate — Validate the spec"
-  putStrLn "  GET /health           — Health check"
-  putStrLn "  GET /brew             — Brew status (moon-dependent)"
-  putStrLn "  POST /admin/reset     — Reset server state"
-  putStrLn "  /*                    — Mock responses for spec paths"
+  putStrLn "  GET /openapi.json     -  OpenAPI spec (JSON)"
+  putStrLn "  GET /openapi.yaml     -  OpenAPI spec (YAML)"
+  putStrLn "  GET /openapi/validate  -  Validate the spec"
+  putStrLn "  GET /health            -  Health check"
+  putStrLn "  GET /brew              -  Brew status (moon-dependent)"
+  putStrLn "  POST /admin/reset      -  Reset server state"
+  putStrLn "  /*                     -  Mock responses for spec paths"
   putStrLn ""
 
   -- Run the server. Priya wrapped this in a forkIO "just in case"

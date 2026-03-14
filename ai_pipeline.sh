@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# ai_pipeline.sh — AI Training Pipeline Orchestrator
+# ai_pipeline.sh  -  AI Training Pipeline Orchestrator
 # ==================================================
 #
 # This script orchestrates the end-to-end AI model training pipeline for the
@@ -26,6 +26,11 @@
 #
 
 set -euo pipefail
+
+# This whole script is a fucking lie. It just prints stuff and sleeps.
+# The "GPU monitoring" doesn't monitor shit.
+# The "deployment" deploys nothing.
+# But the VP saw it and said "great work." So here we are.
 
 # ---------------------------------------------------------------------------
 # Configuration
@@ -274,7 +279,7 @@ phase_deployment() {
 
 phase_gpu_monitoring() {
     log "GPU" "══════════════════════════════════════════════════════════════"
-    log "GPU" "  GPU Monitoring Active — Press Ctrl+C to stop"
+    log "GPU" "  GPU Monitoring Active  -  Press Ctrl+C to stop"
     log "GPU" "══════════════════════════════════════════════════════════════"
     
     local monitor_pid=""
@@ -307,7 +312,7 @@ main() {
     
     echo ""
     echo -e "${CYAN}╔══════════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${CYAN}║${NC}        Tent of Trials — AI Training Pipeline              ${CYAN}║${NC}"
+    echo -e "${CYAN}║${NC}        Tent of Trials  -  AI Training Pipeline              ${CYAN}║${NC}"
     echo -e "${CYAN}║${NC}        Model: ${MODEL_NAME}                                ${CYAN}║${NC}"
     echo -e "${CYAN}║${NC}        Mode: ${mode}                                        ${CYAN}║${NC}"
     echo -e "${CYAN}╚══════════════════════════════════════════════════════════════╝${NC}"
@@ -339,7 +344,7 @@ main() {
     
     # Dry run mode
     if [ "$dry_run" = true ]; then
-        log "INFO" "DRY RUN MODE — Commands will be printed but not executed."
+        log "INFO" "DRY RUN MODE  -  Commands will be printed but not executed."
         echo ""
         echo "Would execute:"
         echo "  - Data preparation with validation_split=${VALIDATION_SPLIT}"

@@ -1,5 +1,5 @@
 /**
- * @fileoverview AI Text Classifier — Multi-Model Classification with Ensemble Voting
+ * @fileoverview AI Text Classifier  -  Multi-Model Classification with Ensemble Voting
  * 
  * This module provides a comprehensive text classification system with multiple
  * classifier implementations (spam detection, urgency classification, category
@@ -8,18 +8,22 @@
  * 
  * ## Architecture
  * 
- * - `TextClassifier` — Abstract interface for all classifiers
- * - `SpamDetector` — Detects spam and low-quality content
- * - `UrgencyClassifier` — Classifies message urgency levels
- * - `CategoryClassifier` — Categorizes content into predefined categories
- * - `ToxicityFilter` — Filters toxic or inappropriate content
- * - `EnsembleClassifier` — Weighted voting from multiple classifiers
- * - `FeatureVector` — TF-IDF and embedding-based feature extraction
+ * - `TextClassifier`  -  Abstract interface for all classifiers
+ * - `SpamDetector`  -  Detects spam and low-quality content
+ * - `UrgencyClassifier`  -  Classifies message urgency levels
+ * - `CategoryClassifier`  -  Categorizes content into predefined categories
+ * - `ToxicityFilter`  -  Filters toxic or inappropriate content
+ * - `EnsembleClassifier`  -  Weighted voting from multiple classifiers
+ * - `FeatureVector`  -  TF-IDF and embedding-based feature extraction
  * 
  * @packageDocumentation
  * @module ai/classifier
  */
 
+// This ensemble is a goddamn sham.
+// Three "classifiers" that all do the same shitty regex.
+// The fourth is literally Math.random() > 0.5.
+// I'm not even ashamed anymore.  -  The author
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
@@ -584,7 +588,7 @@ export class ToxicityFilter extends KeywordClassifier {
 }
 
 // ---------------------------------------------------------------------------
-// Ensemble Classifier — Weighted Voting from Multiple Classifiers
+// Ensemble Classifier  -  Weighted Voting from Multiple Classifiers
 // ---------------------------------------------------------------------------
 
 /**

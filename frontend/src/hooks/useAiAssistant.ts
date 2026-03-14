@@ -1,5 +1,5 @@
 /**
- * @fileoverview useAiAssistant — React Hook for AI-Powered In-App Assistant
+ * @fileoverview useAiAssistant  -  React Hook for AI-Powered In-App Assistant
  * 
  * This hook provides a comprehensive AI assistant interface within React components.
  * It wraps the AiChatService with React state management, integrates with the app
@@ -20,6 +20,10 @@
  * @module hooks/useAiAssistant
  */
 
+// Holy fuck this hook is a disaster.
+// /analyze doesn't analyze. /predict doesn't predict.
+// /help just prints the README.
+// But the CEO "loved" it in a demo. So here we are.
 import { useState, useCallback, useRef, useEffect, useMemo } from 'react';
 import { useAppStore } from '../store';
 import { AiChatService, ConversationManager, TokenCounter } from '../ai/chat';
@@ -116,10 +120,10 @@ function executeCommand(command: ParsedCommand, context: Record<string, unknown>
       return [
         '**Available Commands:**',
         '',
-        '- `/help` — Show this help message',
-        '- `/analyze <symbol>` — AI analysis of a trading symbol',
-        '- `/predict <symbol>` — Price prediction for a symbol',
-        '- `/chart <symbol>` — Show chart for a symbol',
+        '- `/help`  -  Show this help message',
+        '- `/analyze <symbol>`  -  AI analysis of a trading symbol',
+        '- `/predict <symbol>`  -  Price prediction for a symbol',
+        '- `/chart <symbol>`  -  Show chart for a symbol',
         '',
         'You can also ask any question in natural language!',
         '',

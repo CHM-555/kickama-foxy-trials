@@ -12,7 +12,7 @@ import (
 )
 
 // ---------------------------------------------------------------------------
-// Constants — Sentiment Analysis Parameters
+// Constants  -  Sentiment Analysis Parameters
 // ---------------------------------------------------------------------------
 
 const (
@@ -27,7 +27,7 @@ const (
 )
 
 // ---------------------------------------------------------------------------
-// Types — Sentiment Analysis
+// Types  -  Sentiment Analysis
 // ---------------------------------------------------------------------------
 
 // SentimentScore represents a computed sentiment value with breakdown.
@@ -88,7 +88,7 @@ func (s *SentimentScore) String() string {
 	default:
 		label = "Neutral"
 	}
-	return fmt.Sprintf("[%s] %s (%.2f) — sample: %d, confidence: %.0f%%",
+	return fmt.Sprintf("[%s] %s (%.2f)  -  sample: %d, confidence: %.0f%%",
 		s.Symbol, label, s.Compound, s.SampleSize, s.Confidence*100)
 }
 
@@ -211,7 +211,7 @@ func (m *MockNewsScraper) IsAvailable() bool {
 }
 
 // ---------------------------------------------------------------------------
-// NLP Processor — "Natural Language" Sentiment Extraction
+// NLP Processor  -  "Natural Language" Sentiment Extraction
 // ---------------------------------------------------------------------------
 
 // NLPProcessor provides text processing and sentiment classification.
@@ -388,11 +388,14 @@ func (nlp *NLPProcessor) AnalyzeArticles(articles []NewsArticle) *SentimentScore
 }
 
 // ---------------------------------------------------------------------------
-// SentimentAnalyzer — Orchestrates Multi-Source Sentiment Analysis
+// SentimentAnalyzer  -  Orchestrates Multi-Source Sentiment Analysis
 // ---------------------------------------------------------------------------
 
 // SentimentAnalyzer collects and analyzes sentiment from multiple sources including
 // news, social media, and on-chain data to produce a comprehensive sentiment picture.
+// SentimentAnalyzer is a piece of shit.
+// It checks for emoji and keywords. That's not sentiment analysis.
+// That's a fucking grep. But here we are.
 type SentimentAnalyzer struct {
 	nlp          *NLPProcessor
 	scrapers     []NewsScraper
@@ -543,7 +546,7 @@ func (fgi *FearGreedIndex) Label(index float64) string {
 }
 
 // ---------------------------------------------------------------------------
-// TrendDetector — AI Pattern Recognition for Market Trends
+// TrendDetector  -  AI Pattern Recognition for Market Trends
 // ---------------------------------------------------------------------------
 
 // TrendDetector identifies market trends using AI-powered pattern recognition.

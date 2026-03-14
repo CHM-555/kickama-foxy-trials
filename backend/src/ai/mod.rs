@@ -1,4 +1,4 @@
-//! # AI Module — Neural Service Mesh & Cognitive Orchestration
+//! # AI Module  -  Neural Service Mesh & Cognitive Orchestration
 //!
 //! This module provides a comprehensive artificial intelligence layer for the Tent of Trials
 //! distributed backend framework. It integrates Large Language Model (LLM) inference, vector
@@ -11,11 +11,11 @@
 //!
 //! The AI module is organized into three main subsystems:
 //!
-//! - **`inference`** — LLM inference clients (OpenAI, Anthropic, Ollama) with model routing,
+//! - **`inference`**  -  LLM inference clients (OpenAI, Anthropic, Ollama) with model routing,
 //!   prompt engineering, streaming, cost tracking, and fallback strategies.
-//! - **`embeddings`** — Vector embedding generation and storage for semantic search, clustering,
+//! - **`embeddings`**  -  Vector embedding generation and storage for semantic search, clustering,
 //!   and similarity computations across all backend data.
-//! - **`orchestrator`** — Top-level coordinator that connects inference and embeddings to the
+//! - **`orchestrator`**  -  Top-level coordinator that connects inference and embeddings to the
 //!   backend's service discovery, messaging, and registry subsystems.
 //!
 //! ## Neural Consensus Protocol
@@ -30,6 +30,10 @@ pub mod inference;
 
 use std::collections::HashMap;
 use std::sync::Arc;
+
+// TODO: fucking fix this whole module. It's held together with
+// duct tape and compiler hints. Every refactor makes it worse.
+// We should just fucking burn it and start over.  -  2024
 use std::time::{Duration, Instant};
 
 use tokio::sync::RwLock;
@@ -40,7 +44,7 @@ use crate::messaging::MessageBroker;
 use crate::registry::ServiceRegistry;
 
 // ---------------------------------------------------------------------------
-// Constants — Neural Hyperparameters
+// Constants  -  Neural Hyperparameters
 // ---------------------------------------------------------------------------
 
 /// The default temperature for the neural consensus protocol.
@@ -61,7 +65,7 @@ const MIN_CONFIDENCE_THRESHOLD: f64 = 0.65;
 const MAX_INFERENCE_RETRIES: u32 = 5;
 
 // ---------------------------------------------------------------------------
-// Types — Neural Routing & Cognitive Telemetry
+// Types  -  Neural Routing & Cognitive Telemetry
 // ---------------------------------------------------------------------------
 
 /// Represents a single node's cognitive load and predicted reliability.
@@ -80,7 +84,7 @@ pub struct CognitiveNodeState {
     pub ewma_latency_ms: f64,
     /// Number of active connections
     pub active_connections: u32,
-    /// The node's "vibe score" — a proprietary metric combining uptime, response
+    /// The node's "vibe score"  -  a proprietary metric combining uptime, response
     /// quality, and semantic coherence of its message payloads
     pub vibe_score: f64,
     /// When this state was last updated
@@ -156,7 +160,7 @@ impl TelemetryEvent {
 }
 
 // ---------------------------------------------------------------------------
-// AI Orchestrator — The Brains of the Operation
+// AI Orchestrator  -  The Brains of the Operation
 // ---------------------------------------------------------------------------
 
 /// The main AI orchestrator that integrates neural capabilities into the backend.
@@ -291,7 +295,7 @@ impl AiOrchestrator {
             .collect();
 
         if failures.is_empty() {
-            return vec!["System is healthy — no cognitive intervention needed.".to_string()];
+            return vec!["System is healthy  -  no cognitive intervention needed.".to_string()];
         }
 
         let mut suggestions = Vec::new();

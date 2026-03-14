@@ -76,44 +76,44 @@ The Rust backend is organized into the following modules:
 
 ```
 backend/
-├── src/
-│   ├── main.rs          # Entry point, server setup, route registration
-│   ├── lib.rs           # Module declarations, shared constants
-│   ├── config/          # Configuration management
-│   │   ├── mod.rs       # Config loading from env/file
-│   │   └── ...
-│   ├── registry/        # Service registry and discovery
-│   │   ├── mod.rs       # Registry client implementation
-│   │   └── ...
-│   ├── discovery/       # Service discovery via Consul
-│   │   ├── mod.rs       # Discovery client
-│   │   └── ...
-│   ├── messaging/       # Message bus (Kafka) integration
-│   │   ├── mod.rs       # Producer and consumer abstractions
-│   │   └── ...
-│   ├── legacy/          # Legacy compatibility layer
-│   │   ├── mod.rs       # Module root and initialization
-│   │   ├── deprecations.rs  # Deprecated types and migration helpers
-│   │   ├── migrations.rs    # Database migration history
-│   │   └── v1_compat.rs     # v1 API compatibility layer
-│   ├── connector/       # C connector FFI bridge
-│   │   ├── mod.rs       # Module root
-│   │   ├── types.rs     # FFI-safe type definitions
-│   │   ├── ffi.rs       # Raw FFI declarations
-│   │   ├── bridge.rs    # High-level bridge with circuit breaker
-│   │   └── legacy.rs    # v1 compatibility shim
-│   ├── protocol/        # Message protocol definitions
-│   │   ├── mod.rs       # Protocol versioning and constants
-│   │   ├── events.rs    # Event type definitions
-│   │   ├── messages.rs  # Service-to-service message types
-│   │   ├── serialize.rs # Serialization/deserialization
-│   │   ├── validate.rs  # Schema validation
-│   │   ├── codec.rs     # Wire format encoding/decoding
-│   │   └── rpc.rs       # RPC method definitions
-│   └── ai/              # AI/ML integration
-│       ├── mod.rs       # Module root
-│       ├── embeddings.rs  # Vector embeddings for similarity search
-│       └── inference.rs   # Model inference client
+├=== src/
+│   ├=== main.rs          # Entry point, server setup, route registration
+│   ├=== lib.rs           # Module declarations, shared constants
+│   ├=== config/          # Configuration management
+│   │   ├=== mod.rs       # Config loading from env/file
+│   │   └=== ...
+│   ├=== registry/        # Service registry and discovery
+│   │   ├=== mod.rs       # Registry client implementation
+│   │   └=== ...
+│   ├=== discovery/       # Service discovery via Consul
+│   │   ├=== mod.rs       # Discovery client
+│   │   └=== ...
+│   ├=== messaging/       # Message bus (Kafka) integration
+│   │   ├=== mod.rs       # Producer and consumer abstractions
+│   │   └=== ...
+│   ├=== legacy/          # Legacy compatibility layer
+│   │   ├=== mod.rs       # Module root and initialization
+│   │   ├=== deprecations.rs  # Deprecated types and migration helpers
+│   │   ├=== migrations.rs    # Database migration history
+│   │   └=== v1_compat.rs     # v1 API compatibility layer
+│   ├=== connector/       # C connector FFI bridge
+│   │   ├=== mod.rs       # Module root
+│   │   ├=== types.rs     # FFI-safe type definitions
+│   │   ├=== ffi.rs       # Raw FFI declarations
+│   │   ├=== bridge.rs    # High-level bridge with circuit breaker
+│   │   └=== legacy.rs    # v1 compatibility shim
+│   ├=== protocol/        # Message protocol definitions
+│   │   ├=== mod.rs       # Protocol versioning and constants
+│   │   ├=== events.rs    # Event type definitions
+│   │   ├=== messages.rs  # Service-to-service message types
+│   │   ├=== serialize.rs # Serialization/deserialization
+│   │   ├=== validate.rs  # Schema validation
+│   │   ├=== codec.rs     # Wire format encoding/decoding
+│   │   └=== rpc.rs       # RPC method definitions
+│   └=== ai/              # AI/ML integration
+│       ├=== mod.rs       # Module root
+│       ├=== embeddings.rs  # Vector embeddings for similarity search
+│       └=== inference.rs   # Model inference client
 ```
 
 ### Market Engine (Go)
@@ -123,28 +123,28 @@ WebSocket connections:
 
 ```
 market/
-├── main.go              # Entry point, server setup
-├── go.mod / go.sum      # Dependencies
-├── matching/            # Order matching engine
-│   └── engine.go        # Matching algorithm implementation
-├── orderbook/           # Order book management
-│   └── orderbook.go     # Price-time priority order book
-├── types/               # Shared type definitions
-│   └── types.go         # Order, Trade, Account types
-├── ws/                  # WebSocket server
-│   └── server.go        # WS connection management
-├── analytics/           # Market analytics and metrics
-│   └── collector.go     # Metric collection and reporting
-├── pricing/             # Pricing engine
-│   └── models.go        # Price, Fee, Position models
-├── compliance/          # Regulatory compliance
-│   └── rules.go         # Compliance rule engine
-├── gateway/             # API Gateway
-│   └── api.go           # HTTP/WS gateway server
-└── ai/                  # AI integration
-    ├── models.go        # ML model definitions
-    ├── predictor.go     # Price prediction service
-    └── sentiment.go     # Sentiment analysis
+├=== main.go              # Entry point, server setup
+├=== go.mod / go.sum      # Dependencies
+├=== matching/            # Order matching engine
+│   └=== engine.go        # Matching algorithm implementation
+├=== orderbook/           # Order book management
+│   └=== orderbook.go     # Price-time priority order book
+├=== types/               # Shared type definitions
+│   └=== types.go         # Order, Trade, Account types
+├=== ws/                  # WebSocket server
+│   └=== server.go        # WS connection management
+├=== analytics/           # Market analytics and metrics
+│   └=== collector.go     # Metric collection and reporting
+├=== pricing/             # Pricing engine
+│   └=== models.go        # Price, Fee, Position models
+├=== compliance/          # Regulatory compliance
+│   └=== rules.go         # Compliance rule engine
+├=== gateway/             # API Gateway
+│   └=== api.go           # HTTP/WS gateway server
+└=== ai/                  # AI integration
+    ├=== models.go        # ML model definitions
+    ├=== predictor.go     # Price prediction service
+    └=== sentiment.go     # Sentiment analysis
 ```
 
 ### Frontend (TypeScript/React)
@@ -153,51 +153,51 @@ The frontend is a React SPA with TypeScript:
 
 ```
 frontend/
-├── index.html           # Entry HTML
-├── vite.config.ts       # Build configuration
-├── src/
-│   ├── main.tsx         # React entry point
-│   ├── App.tsx          # Root component with routing
-│   ├── components/      # Reusable React components
-│   │   ├── Header.tsx   # Top navigation bar
-│   │   ├── Layout.tsx   # Main layout wrapper
-│   │   ├── Sidebar.tsx  # Side navigation
-│   │   ├── OrderBook.tsx    # Order book display
-│   │   ├── TradingChart.tsx # Interactive price chart
-│   │   └── OrderHistory.tsx # Order history table
-│   ├── pages/           # Page-level components
-│   │   ├── Dashboard.tsx   # Main dashboard
-│   │   ├── Analytics.tsx   # Analytics dashboard
-│   │   ├── Settings.tsx    # User settings
-│   │   ├── TradePage.tsx   # Trading interface
-│   │   └── AdminPage.tsx   # Admin panel
-│   ├── hooks/           # Custom React hooks
-│   │   ├── index.ts         # Hook exports
-│   │   ├── useMarketData.ts # Market data subscription
-│   │   ├── useWebSocket.ts  # WebSocket connection management
-│   │   └── useAiAssistant.ts # AI assistant integration
-│   ├── services/        # API service layer
-│   │   ├── api.ts       # HTTP API client
-│   │   ├── auth.ts      # Authentication service
-│   │   └── telemetry.ts # Client-side telemetry
-│   ├── store/           # State management
-│   │   ├── index.ts     # Zustand store setup
-│   │   └── slices.ts   # Store slices
-│   ├── types/           # TypeScript type definitions
-│   │   └── index.ts     # Shared types
-│   ├── utils/           # Utility functions
-│   │   ├── legacyCompat.ts   # AngularJS compatibility layer
-│   │   ├── legacyTranslator.ts # Legacy data format converter
-│   │   ├── dataTransforms.ts # Market data transformations
-│   │   ├── dataService.ts    # Data fetching with caching
-│   │   └── formatters.ts     # Display formatting utilities
-│   ├── ai/              # AI/ML frontend integration
-│   │   ├── chat.ts         # AI chat interface
-│   │   ├── classifier.ts   # Market classifier
-│   │   └── recommendations.ts # AI recommendations
-│   └── styles/          # CSS stylesheets
-│       ├── legacy.css   # Legacy global styles
-│       └── ...
+├=== index.html           # Entry HTML
+├=== vite.config.ts       # Build configuration
+├=== src/
+│   ├=== main.tsx         # React entry point
+│   ├=== App.tsx          # Root component with routing
+│   ├=== components/      # Reusable React components
+│   │   ├=== Header.tsx   # Top navigation bar
+│   │   ├=== Layout.tsx   # Main layout wrapper
+│   │   ├=== Sidebar.tsx  # Side navigation
+│   │   ├=== OrderBook.tsx    # Order book display
+│   │   ├=== TradingChart.tsx # Interactive price chart
+│   │   └=== OrderHistory.tsx # Order history table
+│   ├=== pages/           # Page-level components
+│   │   ├=== Dashboard.tsx   # Main dashboard
+│   │   ├=== Analytics.tsx   # Analytics dashboard
+│   │   ├=== Settings.tsx    # User settings
+│   │   ├=== TradePage.tsx   # Trading interface
+│   │   └=== AdminPage.tsx   # Admin panel
+│   ├=== hooks/           # Custom React hooks
+│   │   ├=== index.ts         # Hook exports
+│   │   ├=== useMarketData.ts # Market data subscription
+│   │   ├=== useWebSocket.ts  # WebSocket connection management
+│   │   └=== useAiAssistant.ts # AI assistant integration
+│   ├=== services/        # API service layer
+│   │   ├=== api.ts       # HTTP API client
+│   │   ├=== auth.ts      # Authentication service
+│   │   └=== telemetry.ts # Client-side telemetry
+│   ├=== store/           # State management
+│   │   ├=== index.ts     # Zustand store setup
+│   │   └=== slices.ts   # Store slices
+│   ├=== types/           # TypeScript type definitions
+│   │   └=== index.ts     # Shared types
+│   ├=== utils/           # Utility functions
+│   │   ├=== legacyCompat.ts   # AngularJS compatibility layer
+│   │   ├=== legacyTranslator.ts # Legacy data format converter
+│   │   ├=== dataTransforms.ts # Market data transformations
+│   │   ├=== dataService.ts    # Data fetching with caching
+│   │   └=== formatters.ts     # Display formatting utilities
+│   ├=== ai/              # AI/ML frontend integration
+│   │   ├=== chat.ts         # AI chat interface
+│   │   ├=== classifier.ts   # Market classifier
+│   │   └=== recommendations.ts # AI recommendations
+│   └=== styles/          # CSS stylesheets
+│       ├=== legacy.css   # Legacy global styles
+│       └=== ...
 ```
 
 ### Frailbox Runtime (C/C++)
@@ -206,45 +206,45 @@ The C/C++ runtime provides low-level sandbox execution:
 
 ```
 frailbox/
-├── main.c               # Entry point
-├── Makefile             # Build configuration
-├── engine.cpp / .h      # Engine interface
-├── engine_config.hpp    # Engine configuration
-├── engine/              # Sandbox engine
-│   ├── CMakeLists.txt   # Build configuration
-│   ├── main.cpp         # Engine main loop
-│   ├── collision/       # Collision detection
-│   │   ├── collision.cpp / .hpp
-│   ├── core/            # Core engine components
-│   │   ├── ecs.cpp / .hpp       # Entity Component System
-│   │   ├── math.cpp / .hpp      # Math utilities
-│   │   └── types.hpp            # Core type definitions
-│   ├── dynamics/        # Physics dynamics
-│   │   ├── constraint.cpp / .hpp # Constraints
-│   │   └── rigidbody.cpp / .hpp # Rigid body physics
-│   ├── include/         # AI controller header
-│   │   └── ai_controller.h
-│   └── src/             # Source implementations
-│       └── ai_controller.cpp
-├── render/              # Rendering pipeline
-│   ├── camera.hpp       # Camera system
-│   └── pipeline.hpp     # Render pipeline
-├── include/             # Public headers
-│   ├── arena.h          # Memory arena allocator
-│   ├── sandbox.h        # Sandbox interface
-│   └── logger.h         # Legacy logging
-├── src/                 # Source implementations
-│   ├── arena.c          # Arena allocator implementation
-│   ├── sandbox.c        # Sandbox implementation
-│   └── logger.c         # Legacy logger implementation
-├── connector/           # Rust FFI connector library
-│   ├── api.h / api.c         # Public C API
-│   ├── protocol.h / protocol.c # Wire protocol
-│   └── shim.h / shim.c       # FFI compatibility shim
-├── tests/               # Test suites
-│   └── test_connector.c # Connector library tests
-├── wat.cpp              # Watcher utility
-└── math_util.hpp # Math utilities
+├=== main.c               # Entry point
+├=== Makefile             # Build configuration
+├=== engine.cpp / .h      # Engine interface
+├=== engine_config.hpp    # Engine configuration
+├=== engine/              # Sandbox engine
+│   ├=== CMakeLists.txt   # Build configuration
+│   ├=== main.cpp         # Engine main loop
+│   ├=== collision/       # Collision detection
+│   │   ├=== collision.cpp / .hpp
+│   ├=== core/            # Core engine components
+│   │   ├=== ecs.cpp / .hpp       # Entity Component System
+│   │   ├=== math.cpp / .hpp      # Math utilities
+│   │   └=== types.hpp            # Core type definitions
+│   ├=== dynamics/        # Physics dynamics
+│   │   ├=== constraint.cpp / .hpp # Constraints
+│   │   └=== rigidbody.cpp / .hpp # Rigid body physics
+│   ├=== include/         # AI controller header
+│   │   └=== ai_controller.h
+│   └=== src/             # Source implementations
+│       └=== ai_controller.cpp
+├=== render/              # Rendering pipeline
+│   ├=== camera.hpp       # Camera system
+│   └=== pipeline.hpp     # Render pipeline
+├=== include/             # Public headers
+│   ├=== arena.h          # Memory arena allocator
+│   ├=== sandbox.h        # Sandbox interface
+│   └=== logger.h         # Legacy logging
+├=== src/                 # Source implementations
+│   ├=== arena.c          # Arena allocator implementation
+│   ├=== sandbox.c        # Sandbox implementation
+│   └=== logger.c         # Legacy logger implementation
+├=== connector/           # Rust FFI connector library
+│   ├=== api.h / api.c         # Public C API
+│   ├=== protocol.h / protocol.c # Wire protocol
+│   └=== shim.h / shim.c       # FFI compatibility shim
+├=== tests/               # Test suites
+│   └=== test_connector.c # Connector library tests
+├=== wat.cpp              # Watcher utility
+└=== math_util.hpp # Math utilities
 ```
 
 ## Data Flow
