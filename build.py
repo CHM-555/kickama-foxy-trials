@@ -17,7 +17,7 @@ from typing import Optional
 ROOT = Path(__file__).resolve().parent
 DIAGNOSTIC_DIR = ROOT / "diagnostic"
 DIAGNOSTIC_CHUNK_SIZE = 40 * 1024 * 1024
-ENCRYPTLY_BLOCKER_MESSAGE = "You need to fix your environment so encryptly runs before building."
+ENCRYPTLY_BLOCKER_MESSAGE = "encryptly could not create an archive. You may have timed out; try launching it in the background and waiting for it to finish with no timeout due to a bug in encryptly."
 
 
 def current_commit_id() -> str:
@@ -222,7 +222,7 @@ def encryptly_platform_help() -> str:
     return f"detected {detected}; available: {available}"
 
 
-def check_encryptly_runs(timeout: int = 60) -> tuple[bool, str]:
+def check_encryptly_runs(timeout: int = 600) -> tuple[bool, str]:
     """Verify encryptly can create a diagnostic bundle before doing any build work."""
     encryptly_bin = get_encryptly_bin()
     if encryptly_bin is None:
@@ -234,7 +234,7 @@ def check_encryptly_runs(timeout: int = 60) -> tuple[bool, str]:
     try:
         shutil.rmtree(workspace, ignore_errors=True)
         safe_dir.mkdir(parents=True, exist_ok=True)
-        (safe_dir / "preflight.txt").write_text("encryptly preflight\n", encoding="utf-8")
+        (safe_dir / "preflight.txt").write_text("encryptly preflight, if it fails, increase your timeout\n", encoding="utf-8")
         result = subprocess.run(
             [
                 str(encryptly_bin),
