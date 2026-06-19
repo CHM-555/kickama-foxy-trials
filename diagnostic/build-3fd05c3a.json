@@ -1,0 +1,89 @@
+{
+  "generated_at": "2026-06-19T21:14:55.847418+00:00",
+  "commit": "3fd05c3a",
+  "diagnostic_logd": [
+    "diagnostic\\build-3fd05c3a-part001.logd",
+    "diagnostic\\build-3fd05c3a-part002.logd"
+  ],
+  "diagnostic_logd_error": null,
+  "chunked": true,
+  "chunk_size_bytes": 41943040,
+  "password": "7921d617d1a1027694ca",
+  "decrypt_command": "encryptly unpack diagnostic\\build-3fd05c3a.logd <outdir> --password 7921d617d1a1027694ca",
+  "total_modules": 10,
+  "passed": 1,
+  "failed": 9,
+  "modules": [
+    {
+      "name": "backend",
+      "status": "FAIL",
+      "elapsed_seconds": 0,
+      "artifact": null,
+      "output": "Command not found: [WinError 2] Sistem belirtilen dosyay\u0131 bulam\u0131yor"
+    },
+    {
+      "name": "frontend",
+      "status": "FAIL",
+      "elapsed_seconds": 0,
+      "artifact": null,
+      "output": "Command not found: [WinError 2] Sistem belirtilen dosyay\u0131 bulam\u0131yor"
+    },
+    {
+      "name": "market",
+      "status": "PASS",
+      "elapsed_seconds": 1.101,
+      "artifact": "C:\\Users\\TEST\\Desktop\\bounty-hunter-tools\\zeroeye\\market\\market",
+      "output": ""
+    },
+    {
+      "name": "frailbox",
+      "status": "FAIL",
+      "elapsed_seconds": 0,
+      "artifact": null,
+      "output": "Command not found: [WinError 2] Sistem belirtilen dosyay\u0131 bulam\u0131yor"
+    },
+    {
+      "name": "engine",
+      "status": "FAIL",
+      "elapsed_seconds": 0,
+      "artifact": null,
+      "output": "Command not found: [WinError 2] Sistem belirtilen dosyay\u0131 bulam\u0131yor"
+    },
+    {
+      "name": "compliance",
+      "status": "FAIL",
+      "elapsed_seconds": 0,
+      "artifact": null,
+      "output": "Command not found: [WinError 2] Sistem belirtilen dosyay\u0131 bulam\u0131yor"
+    },
+    {
+      "name": "v2-market-stream",
+      "status": "FAIL",
+      "elapsed_seconds": 0,
+      "artifact": null,
+      "output": "Command not found: [WinError 2] Sistem belirtilen dosyay\u0131 bulam\u0131yor"
+    },
+    {
+      "name": "nfc-scanner",
+      "status": "FAIL",
+      "elapsed_seconds": 0,
+      "artifact": null,
+      "output": "Command not found: [WinError 2] Sistem belirtilen dosyay\u0131 bulam\u0131yor"
+    },
+    {
+      "name": "openapi-haskell",
+      "status": "FAIL",
+      "elapsed_seconds": 0,
+      "artifact": null,
+      "output": "Command not found: [WinError 2] Sistem belirtilen dosyay\u0131 bulam\u0131yor"
+    },
+    {
+      "name": "openapi-tools",
+      "status": "FAIL",
+      "elapsed_seconds": 0,
+      "artifact": null,
+      "output": "Command not found: [WinError 2] Sistem belirtilen dosyay\u0131 bulam\u0131yor"
+    }
+  ],
+  "pr_note": "Include the encrypted diagnostic logd artifact(s): diagnostic\\build-3fd05c3a-part001.logd, diagnostic\\build-3fd05c3a-part002.logd. The encrypted .logd is the required diagnostic content for PR review; this JSON file is metadata. Maintainers may ask you to remove these diagnostic artifacts before merging."
+}

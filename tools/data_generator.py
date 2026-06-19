@@ -341,9 +341,14 @@ def main():
             key = f"{inst['symbol']}_{interval}min"
             all_candles[key] = candles
 
-    output_format = args.format
-    if output_format == "both":
-        output_format = "json"  # Default for combined
+    if args.csv and args.json:
+        output_format = "both"
+    elif args.csv:
+        output_format = "csv"
+    elif args.json:
+        output_format = "json"
+    else:
+        output_format = args.format
 
     # Export
     if output_format in ("json", "both"):
