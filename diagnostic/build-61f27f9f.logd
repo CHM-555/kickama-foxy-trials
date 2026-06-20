@@ -1,0 +1,7 @@
+Diagnostic log placeholder for build-61f27f9f.
+
+python3 build.py generated diagnostic/build-61f27f9f.json, but the bundled
+tools/encryptly/macos-arm64/encryptly pack command failed locally with token
+ee6ff725add843a5986b before it could create an encrypted .logd.
+
+Validation and module results are recorded in diagnostic/build-61f27f9f.json.
