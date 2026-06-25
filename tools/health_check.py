@@ -38,8 +38,39 @@ import ssl
 import subprocess
 import sys
 import time
+import threading
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
+
+# ---------------------------------------------------------------------------
+# RATE LIMITER (Token Bucket)
+# ---------------------------------------------------------------------------
+
+class TokenBucket:
+    """Simple token bucket rate limiter for health check probes."""
+    
+    def __init__(self, rate: float, burst: Optional[int] = None):
+        self.rate = rate               # tokens per second
+        self.burst = burst or int(rate)  # max burst size (default = 1 second worth)
+        self.tokens = float(self.burst)
+        self.last_refill = time.monotonic()
+        self._lock = threading.Lock()
+    
+    def acquire(self, tokens: float = 1.0) -> float:
+        with self._lock:
+            now = time.monotonic()
+            elapsed = now - self.last_refill
+            self.tokens = min(self.burst, self.tokens + elapsed * self.rate)
+            self.last_refill = now
+            
+            if self.tokens >= tokens:
+                self.tokens -= tokens
+                return 0.0  # no wait
+            else:
+                deficit = tokens - self.tokens
+                wait = deficit / self.rate
+                self.tokens = 0.0
+                return wait  # caller should sleep this long
 
 # ---------------------------------------------------------------------------
 # CONSTANTS
@@ -200,7 +231,9 @@ def check_load_average() -> Tuple[str, str, float]:
 # HEALTH CHECK RUNNER
 # ---------------------------------------------------------------------------
 
-def run_health_checks(service: Optional[str] = None, json_output: bool = False) -> Dict[str, Any]:
+def run_health_checks(service: Optional[str] = None, json_output: bool = False,
+                     rate_limiter: Optional[TokenBucket] = None,
+                     global_timeout: Optional[int] = None) -> Dict[str, Any]:
     results: Dict[str, Any] = {
         "timestamp": datetime.now().isoformat(),
         "hostname": socket.gethostname(),
@@ -208,6 +241,7 @@ def run_health_checks(service: Optional[str] = None, json_output: bool = False) 
         "infrastructure": {},
         "system": {},
         "overall_status": "OK",
+        "rate_limit": {"probe_rate": rate_limiter.rate if rate_limiter else None},
     }
 
     all_ok = True
@@ -216,14 +250,26 @@ def run_health_checks(service: Optional[str] = None, json_output: bool = False) 
     for name, config in SERVICES.items():
         if service and name != service:
             continue
+        
+        # Apply per-service timeout override
+        timeout = global_timeout if global_timeout is not None else config["timeout"]
+        
+        # Rate limit: acquire token before probe
+        if rate_limiter:
+            wait = rate_limiter.acquire()
+            if wait > 0:
+                print(f"  Rate limit: waiting {wait:.2f}s before probing {name}...")
+                time.sleep(wait)
+        
         status, detail, code = check_http_service(
-            config["host"], config["port"], config["path"], config["timeout"]
+            config["host"], config["port"], config["path"], timeout
         )
         results["services"][name] = {
             "status": status,
             "detail": detail,
             "code": code,
             "endpoint": f"http://{config['host']}:{config['port']}{config['path']}",
+            "timeout": timeout,
         }
         if status == "CRITICAL":
             all_ok = False
@@ -232,11 +278,20 @@ def run_health_checks(service: Optional[str] = None, json_output: bool = False) 
     for name, config in INFRASTRUCTURE.items():
         if service and name != service:
             continue
-        status, detail, latency = check_tcp_port(config["host"], config["port"], config["timeout"])
+        
+        timeout = global_timeout if global_timeout is not None else config.get("timeout", 5)
+        
+        if rate_limiter:
+            wait = rate_limiter.acquire()
+            if wait > 0:
+                time.sleep(wait)
+        
+        status, detail, latency = check_tcp_port(config["host"], config["port"], timeout)
         results["infrastructure"][name] = {
             "status": status,
             "detail": detail,
             "endpoint": f"{config['host']}:{config['port']}",
+            "timeout": timeout,
         }
         if status == "CRITICAL":
             all_ok = False
@@ -307,17 +362,28 @@ def parse_args():
     parser.add_argument("--watch", "-w", action="store_true", help="Continuous monitoring")
     parser.add_argument("--interval", "-i", type=int, default=30, help="Check interval in seconds")
     parser.add_argument("--output", "-o", help="Output file path")
+    parser.add_argument("--timeout", type=int, default=None,
+                        help="Per-service timeout override in seconds (default: use service default)")
+    parser.add_argument("--probe-rate", type=float, default=None,
+                        help="Max health check probes per second (e.g., --probe-rate 5 = 5 probes/sec)")
     return parser.parse_args()
 
 
 def main():
     args = parse_args()
+    
+    # Set up rate limiter if --probe-rate specified
+    rate_limiter = None
+    if args.probe_rate is not None:
+        rate_limiter = TokenBucket(rate=args.probe_rate)
 
     if args.watch:
         print(f"Continuous monitoring (interval: {args.interval}s). Press Ctrl+C to stop.")
+        if rate_limiter:
+            print(f"Rate limit: {args.probe_rate:.1f} probes/second")
         try:
             while True:
-                results = run_health_checks(args.service, args.json)
+                results = run_health_checks(args.service, args.json, rate_limiter, args.timeout)
                 if args.json:
                     print(json.dumps(results, indent=2))
                 else:
@@ -326,7 +392,7 @@ def main():
         except KeyboardInterrupt:
             print("\nMonitoring stopped")
     else:
-        results = run_health_checks(args.service, args.json)
+        results = run_health_checks(args.service, args.json, rate_limiter, args.timeout)
         if args.json:
             output = json.dumps(results, indent=2)
             print(output)
